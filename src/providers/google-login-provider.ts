@@ -33,6 +33,9 @@ export class GoogleLoginProvider extends BaseLoginProvider {
                 user.photoUrl = profile.getImageUrl();
                 user.firstName = profile.getGivenName();
                 user.lastName = profile.getFamilyName();
+                user.token = this.auth2.currentUser.get().getAuthResponse().id_token;
+
+
 
                 resolve(user);
               }
@@ -54,6 +57,7 @@ export class GoogleLoginProvider extends BaseLoginProvider {
         user.name = profile.getName();
         user.email = profile.getEmail();
         user.photoUrl = profile.getImageUrl();
+        user.token = this.auth2.currentUser.get().getAuthResponse().id_token;
 
         resolve(user);
       });
