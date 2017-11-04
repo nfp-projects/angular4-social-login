@@ -26,6 +26,7 @@ export class GoogleLoginProvider extends BaseLoginProvider {
               if (this.auth2.isSignedIn.get()) {
                 let user: SocialUser = new SocialUser();
                 let profile = this.auth2.currentUser.get().getBasicProfile();
+                let authObject = this.auth2.currentUser.get().getAuthResponse();
 
                 user.id = profile.getId();
                 user.name = profile.getName();
@@ -33,7 +34,7 @@ export class GoogleLoginProvider extends BaseLoginProvider {
                 user.photoUrl = profile.getImageUrl();
                 user.firstName = profile.getGivenName();
                 user.lastName = profile.getFamilyName();
-                user.token = this.auth2.currentUser.get().getAuthResponse().id_token;
+                user.authToken = authObject;
 
 
 
