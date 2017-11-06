@@ -35,7 +35,7 @@ export class FacebookLoginProvider extends BaseLoginProvider {
                 user.firstName = response.first_name;
                 user.lastName = response.last_name;
                 user.authToken = authObject;
-                if (user.authToken!=null)
+                if (user.authToken!=undefined)
                 {
                 resolve(user);
                 }
