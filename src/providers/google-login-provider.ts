@@ -35,9 +35,6 @@ export class GoogleLoginProvider extends BaseLoginProvider {
                 user.firstName = profile.getGivenName();
                 user.lastName = profile.getFamilyName();
                 user.authToken = authObject;
-
-
-
                 resolve(user);
               }
             });
