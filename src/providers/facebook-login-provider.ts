@@ -23,44 +23,47 @@ export class FacebookLoginProvider extends BaseLoginProvider {
           });
           FB.AppEvents.logPageView();
 
-          FB.getLoginStatus(function (response: any) {
-            if (response.status === 'connected') {
-              FB.api('/me?fields=name,email,picture,first_name,last_name', (response: any) => {
-                let user: SocialUser = new SocialUser();
-                let authObject = FB.getAuthResponse(); 
-                user.id = response.id;
-                user.name = response.name;
-                user.email = response.email;
-                user.photoUrl = "https://graph.facebook.com/" + response.id + "/picture?type=normal";
-                user.firstName = response.first_name;
-                user.lastName = response.last_name;
-                user.authToken = authObject;
-                if (user.authToken!=undefined)
-                {
-                resolve(user);
-                }
-              });
-            }
-          });
+          // FB.getLoginStatus(function (response: any) {
+          //   if (response.status === 'connected') {
+          //     FB.api('/me?fields=name,email,picture,first_name,last_name', (response: any) => {
+          //       let user: SocialUser = new SocialUser();
+          //       let authObject = FB.getAuthResponse(); 
+          //       user.id = response.id;
+          //       user.name = response.name;
+          //       user.email = response.email;
+          //       user.photoUrl = "https://graph.facebook.com/" + response.id + "/picture?type=normal";
+          //       user.firstName = response.first_name;
+          //       user.lastName = response.last_name;
+          //       user.authToken = authObject;
+          //       if (user.authToken!=undefined)
+          //       {
+          //       resolve(user);
+          //       }
+          //     });
+          //   }
+          // });
         });
     });
   }
 
   signIn(): Promise<SocialUser> {
+
     return new Promise((resolve, reject) => {
       FB.login((response: any) => {
         if (response.authResponse) {
           FB.api('/me?fields=name,email,picture,first_name,last_name', (response: any) => {
-            let user: SocialUser = new SocialUser();
 
+            let authObject = FB.getAuthResponse(); 
+            let user: SocialUser = new SocialUser();
             user.id = response.id;
             user.name = response.name;
             user.email = response.email;
             user.photoUrl = "https://graph.facebook.com/" + response.id + "/picture?type=normal";
             user.firstName = response.first_name;
             user.lastName = response.last_name;
-            user.authToken = response.authResponse;
+            user.authToken = authObject;
             
+
             resolve(user);
           });
         }
