@@ -22,22 +22,22 @@ export class GoogleLoginProvider extends BaseLoginProvider {
               scope: 'email'
             });
 
-            this.auth2.then(() => {
-              if (this.auth2.isSignedIn.get()) {
-                let user: SocialUser = new SocialUser();
-                let profile = this.auth2.currentUser.get().getBasicProfile();
-                let authObject = this.auth2.currentUser.get().getAuthResponse();
+            // this.auth2.then(() => {
+            //   if (this.auth2.isSignedIn.get()) {
+            //     let user: SocialUser = new SocialUser();
+            //     let profile = this.auth2.currentUser.get().getBasicProfile();
+            //     let authObject = this.auth2.currentUser.get().getAuthResponse();
 
-                user.id = profile.getId();
-                user.name = profile.getName();
-                user.email = profile.getEmail();
-                user.photoUrl = profile.getImageUrl();
-                user.firstName = profile.getGivenName();
-                user.lastName = profile.getFamilyName();
-                user.authToken = authObject;
-                resolve(user);
-              }
-            });
+            //     user.id = profile.getId();
+            //     user.name = profile.getName();
+            //     user.email = profile.getEmail();
+            //     user.photoUrl = profile.getImageUrl();
+            //     user.firstName = profile.getGivenName();
+            //     user.lastName = profile.getFamilyName();
+            //     user.authToken = authObject;
+            //     resolve(user);
+            //   }
+            // });
           });
       });
     });
