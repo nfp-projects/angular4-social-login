@@ -67,21 +67,8 @@ export class AuthService {
     });
   }
 
-  signOut(): Promise<any> {
-    return new Promise((resolve, reject) => {
-      let providerId = this._user.provider;
-      let providerObject = this.providers.get(providerId);
-      if (providerObject) {
-        providerObject.signOut().then(() => {
-          resolve();
-
-          this._user = null;
-          this._authState.next(null);
-        });
-      } else {
-        reject(AuthService.LOGIN_PROVIDER_NOT_FOUND);
-      }
-    });
+  signOut(): void {
+    this._user = null;
+    this._authState.next(null);
   }
-
 }
